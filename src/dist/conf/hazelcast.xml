@@ -24,10 +24,9 @@
            xmlns="http://www.hazelcast.com/schema/config"
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <group>
-        <name>conceptjs</name>
-        <password>socialweb30</password>
+        <name>hchapoc</name>
+        <password>hchapoc</password>
     </group>
-    <management-center enabled="true">http://localhost:8089/mancenter</management-center>
     <network>
         <port auto-increment="true" port-count="100">5701</port>
         <outbound-ports>
@@ -93,22 +92,19 @@
         <queue-capacity>0</queue-capacity>
     </executor-service>
 
-    <reliable-topic name="conceptUpdate">
-        <read-batch-size>10</read-batch-size>
-        <topic-overload-policy>DISCARD_OLDEST</topic-overload-policy>
-        <statistics-enabled>true</statistics-enabled>
-    </reliable-topic>
-    
-    <reliable-topic name="scheduleJobUpdate">
-        <read-batch-size>10</read-batch-size>
-        <topic-overload-policy>DISCARD_OLDEST</topic-overload-policy>
-        <statistics-enabled>true</statistics-enabled>
-    </reliable-topic>
+    <map name="services">
+    	<backup-count>1</backup-count>
+	</map>
+	
+	<listeners>
+        <listener>com.lambdazen.hazelcast.ServiceMigrationListener</listener>
+	</listeners>
 
     <lite-member enabled="false"/>
     
     <properties>
     	<property name="hazelcast.logging.type">slf4j</property>
+    	<property name="hazelcast.partition.count">2</property>
   	</properties>
 
 </hazelcast>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+	<property name="logFolder" value="../log" />
+
+	<appender name="hchapoc"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${logFolder}/hchapoc.log</file>
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>${logFolder}/das.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>
+				%date %level [%thread] %.-60logger %msg%n
+			</pattern> <!--  not using [%file:%line] -->
+		</encoder>
+	</appender>
+	
+	<logger name="com.hazelcast" level="INFO" additivity="true">
+       <appender-ref ref="hchapoc" />
+    </logger>
+
+    <logger name="com.lambdazen.hazelcast" level="INFO" additivity="true">
+       <appender-ref ref="hchapoc" />
+    </logger>
+</configuration>
