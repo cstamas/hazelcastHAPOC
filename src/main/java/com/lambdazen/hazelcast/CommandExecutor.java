@@ -52,7 +52,7 @@ public class CommandExecutor {
                 Scanner scanner = new Scanner(System.in);
         try {
                 Thread.sleep(3000);
-                System.out.println("Welcome to hazelcast high availability POC environment!");
+                System.out.println("\n\nWelcome to Hazelcast High Availability POC environment!");
             while (true) {
                 System.out.println("\nPlease enter your command:\n");
                 String line = scanner.nextLine();
